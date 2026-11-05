@@ -25,7 +25,7 @@ jobs:
           npm install --no-save tailwindcss@4 @tailwindcss/cli@4 "$GITHUB_WORKSPACE"
           printf '@import "tailwindcss" source(none);\n@import "@radiosilence/theme";\n@source inline("bg-brand text-warn font-sans text-body");\n' > in.css
           npx tailwindcss -i in.css -o out.css
-          grep -q -- '--color-brand' out.css
+          grep -q 'var(--brand)' out.css
           grep -q 'Geist Mono' out.css
 
   publish:
