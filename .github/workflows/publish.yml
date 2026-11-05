@@ -1,0 +1,57 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      # The package is only useful if Tailwind accepts it as an import.
+      - name: Compile a stylesheet that imports the theme
+        run: |
+          mkdir -p /tmp/probe && cd /tmp/probe
+          npm init -y >/dev/null
+          npm install --no-save tailwindcss@4 @tailwindcss/cli@4 "$GITHUB_WORKSPACE"
+          printf '@import "tailwindcss" source(none);\n@import "@radiosilence/theme";\n@source inline("bg-brand text-warn font-sans text-body");\n' > in.css
+          npx tailwindcss -i in.css -o out.css
+          grep -q -- '--color-brand' out.css
+          grep -q 'Geist Mono' out.css
+
+  publish:
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+      # A push publishes only when it changes the version; a published version is never overwritten.
+      - name: Publish, tag and release a new version
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(node -p 'require("./package.json").version')
+          if npm view "@radiosilence/theme@$version" version >/dev/null 2>&1; then
+            echo "$version is already published"
+            exit 0
+          fi
+          npm publish
+          notes=$(awk -v v="## $version" '$0==v{f=1;next} /^## /{f=0} f' CHANGELOG.md)
+          gh release create "v$version" --target "$GITHUB_SHA" --title "v$version" --notes "$notes"
