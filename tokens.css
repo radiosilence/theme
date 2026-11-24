@@ -3,9 +3,9 @@
  * the controls from them; a page that wants the tokens without the controls (a static site with its own markup)
  * imports this file alone.
  *
- * Tailwind's own palette, radii, shadows, blurs and type sizes are removed rather than left beside the theme's, so a
- * template cannot reach for `rounded-lg`, `shadow-xl`, `text-sm` or `bg-red-500`: those classes compile to nothing,
- * and `kit-check` reports them. The look has square corners, no shadows or blur, one accent and seven type roles
+ * Tailwind's own palette, radii, shadows, blurs and type sizes are removed rather than left beside the theme's, so
+ * `rounded-lg`, `shadow-xl`, `text-sm` and `bg-red-500` compile to nothing. What clearing cannot reach (`rounded-full`,
+ * arbitrary values) `kit-check` reports. The look has square corners, no shadows or blur, one accent and seven type roles
  * (koan's docs/design/koan-theme.md); a vocabulary that cannot say anything else keeps it that way.
  *
  * The font URL is relative, so it resolves beside the compiled stylesheet. A project serves geist-mono.woff2 from this
@@ -39,6 +39,8 @@
   --warn: #e6b450;
   /* The checkbox's tick, in `bg`: a data URL cannot read a custom property, so it is stated per scheme. */
   --tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.5l2.5 2.5L11 4.5' fill='none' stroke='%231e1e1e' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E");
+  /* The select's chevron, in `muted`, stated per scheme for the same reason. */
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23919191' stroke-width='1.4' stroke-linecap='square'/%3E%3C/svg%3E");
 }
 
 @media (prefers-color-scheme: light) {
@@ -57,6 +59,7 @@
     /* The dark amber is unreadable on white; this one is 4.9:1 on --surface. */
     --warn: #8a6100;
     --tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.5l2.5 2.5L11 4.5' fill='none' stroke='%23ffffff' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E");
+    --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23666666' stroke-width='1.4' stroke-linecap='square'/%3E%3C/svg%3E");
   }
 }
 

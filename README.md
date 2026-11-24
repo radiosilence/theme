@@ -29,9 +29,9 @@ The package is published to GitHub Packages, so installing it needs a token with
 
 **Tokens** (`tokens.css`): the colours by role (`bg`, `surface`, `rule`, `hover`, `ink`, `strong`, `muted`, `brand`, `ok`, `warn`, `bad`), the seven type roles (`fine`, `meta`, `control`, `body`, `title-sm`, `title`, `display`, plus `input`, the 16px a field needs so iOS does not zoom into it), and the `busy`, `sweep` and `fade` animations.
 
-Tailwind's own palette, radii, shadows, blurs and type sizes are removed. `rounded-lg`, `shadow-xl`, `text-sm` and `bg-red-500` compile to nothing, because the look has square corners, no shadows or blur, colours by role and seven type sizes, and a vocabulary that can say only that keeps every app to it.
+Tailwind's own palette, radii, shadows, blurs and type sizes are removed: `rounded-lg`, `shadow-xl`, `text-sm` and `bg-red-500` compile to nothing. What that cannot reach, such as `rounded-full` and arbitrary values, kit-check reports. This is because the look has square corners, no shadows or blur, colours by role and seven type sizes, and a vocabulary that can say only that keeps every app to it.
 
-**Elements** (`kit.css`, base layer): plain markup comes out in the theme. `<button>` is the bordered button; `<input>`, `<select>` and `<textarea>` the square field; a checkbox or radio is the square toggle; `<input type="range">` the hairline slider; `<dialog>` a hairline panel over a dimmed page; `h1` to `h3`, links, `strong`, `small` and `:focus-visible` are set. The app's own words (headings, buttons, labels) are lowercase; a heading showing a person's text adds `normal-case`.
+**Elements** (`kit.css`, base layer): plain markup comes out in the theme. `<button>` is the bordered button; `<input>`, `<select>` and `<textarea>` the square field; a checkbox or radio is the square toggle; `<input type="range">` the hairline slider (in WebKit its done part is drawn from a `--fill` percentage the page's script keeps up to date); `<dialog>` a hairline panel over a dimmed page; `h1` to `h3`, links, `strong`, `small` and `:focus-visible` are set. The app's own words (headings, buttons, labels) are lowercase; a heading showing a person's text adds `normal-case`.
 
 **Classes** (`kit.css`, components layer):
 
@@ -78,7 +78,7 @@ Layout, spacing and anything particular to one app stay in the app's templates a
 kit-check templates src
 ```
 
-Reports classes outside the look in templates and in code that writes markup: rounded corners, shadows, rings, blur, gradients, Tailwind's palette and type sizes, arbitrary colours, and `style=` attributes, which the CSP blocks. Most of these already compile to nothing; kit-check says where they are, and fails CI. A deliberate exception carries `kit: raw` and its reason on the line or the line above. An app runs it from its CSS task or CI:
+Reports classes outside the look in templates and in code that writes markup (`class`, JSX's `className` and `classList` calls, across lines): rounded corners, shadows, rings, blur, gradients, Tailwind's palette and type sizes, arbitrary colours, and `style=` attributes, which the CSP blocks. Most of these already compile to nothing; kit-check says where they are, and fails CI. A deliberate exception carries `kit: raw` and its reason on the line or the line above. An app runs it from its CSS task or CI:
 
 ```sh
 node node_modules/@radiosilence/theme/kit-check.mjs templates src

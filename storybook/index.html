@@ -134,5 +134,13 @@
       <form method="dialog" class="flex justify-end gap-3"><button class="quiet">cancel</button><button class="primary">add</button></form>
     </dialog>
     <div id="toast" class="toast" hidden>Copied.</div>
+    <script>
+      // WebKit draws the slider's done part from --fill.
+      for (const range of document.querySelectorAll('input[type="range"]')) {
+        const fill = () => range.style.setProperty("--fill", `${(100 * (range.value - range.min)) / (range.max - range.min)}%`);
+        fill();
+        range.addEventListener("input", fill);
+      }
+    </script>
   </body>
 </html>

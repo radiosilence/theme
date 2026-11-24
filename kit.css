@@ -8,9 +8,10 @@
  */
 
 @layer base {
+  /* `clip` rather than `hidden`, which would make body a scroll container and stop `sticky` sticking. */
   html,
   body {
-    @apply overflow-x-hidden;
+    @apply overflow-x-clip;
   }
 
   /* Touch screens get no hover, so a tap's highlight is the only sign it landed. Preflight removes it. */
@@ -79,18 +80,21 @@
   /* Bordered: a button's weight unless the page says otherwise. Square, as every control in the theme is; the outline
    * is `muted` because `rule` is too faint to show where a control is. `.button` draws a link the same way. */
   button,
-  .button {
+  .button,
+  input:is([type="submit"], [type="button"], [type="reset"]) {
     @apply inline-flex cursor-pointer items-center justify-center gap-1.5 border border-muted bg-transparent px-3 py-1.5 text-meta text-ink select-none hover:bg-hover/30 hover:no-underline active:bg-hover disabled:cursor-default disabled:opacity-40 disabled:hover:bg-transparent;
   }
 
-  input,
+  input:not([type="submit"], [type="button"], [type="reset"], [type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"]),
   select,
   textarea {
     @apply min-w-0 border border-muted bg-transparent px-2.5 py-2 text-input text-ink normal-case;
   }
 
+  /* Drawn rather than native, which on Safari is a rounded menu button whatever the border says. */
   select {
-    @apply cursor-pointer;
+    @apply cursor-pointer appearance-none pr-8;
+    background: var(--chevron) right 10px center / 10px no-repeat;
   }
 
   ::placeholder {
@@ -109,7 +113,8 @@
   }
 
   /* The slider: a hairline track, the part done thicker in the accent, and a square thumb shown only while it is in
-   * use. `--fill` is the share done, set by whatever moves the value. */
+   * use. WebKit has no part for the done share, so there it is drawn from `--fill` (a percentage), which the page's
+   * script sets from the value on load and on input; Firefox draws it itself. */
   input[type="range"] {
     @apply h-11 cursor-pointer appearance-none border-0 bg-transparent p-0;
   }
@@ -216,7 +221,8 @@
     @apply border-bad;
   }
 
-  .field > small.warn {
+  .field > small.warn,
+  .field.warn > small {
     @apply text-warn;
   }
 
