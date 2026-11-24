@@ -12,6 +12,7 @@ import { lstatSync, readdirSync, readFileSync } from "node:fs";
 import { extname, join } from "node:path";
 
 const EXTENSIONS = new Set([".html", ".askama", ".jinja", ".j2", ".rs", ".ts", ".tsx", ".js", ".jsx", ".mjs"]);
+const CODE = new Set([".rs", ".ts", ".tsx", ".js", ".jsx", ".mjs"]);
 const SKIP = new Set(["node_modules", "target", "dist", ".git"]);
 
 const PALETTE =
@@ -29,8 +30,8 @@ const RULES = [
 ];
 
 const CLASS_VALUES = [
-  /\bclass(?:Name)?=\\?"([^"\\]*)\\?"/g,
-  /\bclass(?:Name)?='([^']*)'/g,
+  /\bclass(?:Name)?\s*=\s*\\?"([^"\\]*)\\?"/g,
+  /\bclass(?:Name)?\s*=\s*'([^']*)'/g,
   /\bclassName=\{`([^`]*)`\}/g,
   /classList\.(?:add|remove|toggle)\(([^)]*)\)/g,
 ];
@@ -80,6 +81,17 @@ for (const root of paths) {
 
     for (const match of text.matchAll(/\sstyle=\\?["'{]/g)) {
       report(match.index, "style= — inline styles are blocked by the CSP; use a class");
+    }
+    // Code also keeps class lists in constants and builds them in strings. Any string literal is read there, but only
+    // for hyphenated tokens, since a bare word in prose ("ring", "blur") is not a class.
+    if (CODE.has(extname(file))) {
+      for (const match of text.matchAll(/"((?:[^"\\\n]|\\.)*)"|`([^`]*)`/g)) {
+        const value = strip(match[1] ?? match[2]);
+        for (const token of value.split(/\s+/).filter((t) => t.includes("-"))) {
+          const rule = RULES.find(([re]) => re.test(base(token)));
+          if (rule) report(match.index + 1 + Math.max(0, value.indexOf(token)), `${token} — ${rule[1]}`);
+        }
+      }
     }
     for (const pattern of CLASS_VALUES) {
       for (const match of text.matchAll(pattern)) {
