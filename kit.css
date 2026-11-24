@@ -212,6 +212,10 @@
     @apply text-bad;
   }
 
+  .field.bad :is(input, select, textarea) {
+    @apply border-bad;
+  }
+
   .field > small.warn {
     @apply text-warn;
   }
