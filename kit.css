@@ -240,6 +240,10 @@
     @apply mt-0;
   }
 
+  .panel > :last-child {
+    @apply mb-0;
+  }
+
   /* Something the page has to say about itself: a result, an error, a warning. A rule on its leading edge in the tone. */
   .notice {
     @apply my-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-l-2 border-brand py-1 pl-3 text-control;

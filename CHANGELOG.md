@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+- **A panel ending in a paragraph keeps even padding.** The paragraph's bottom margin had been added to the panel's padding.
+
 ## 0.2.1
 
 - **An unchecked checkbox or radio is outlined again.** 0.2.0 drew it with no border, so it could not be seen.
