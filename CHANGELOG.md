@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- **An unchecked checkbox or radio is outlined again.** 0.2.0 drew it with no border, so it could not be seen.
+
 ## 0.2.0
 
 - **The web kit.** Plain elements come out in the theme (the bordered button, the square field and toggle, the slider, the dialog, headings and focus), and classes give the rest: the button weights, `field`, `toggle`, `panel`, `notice`, `status`, `meter`, `busy`, `skeleton`, `code`, `rows`, `dense` tables, `disclosure`, `toast` and `sheet`. Taken from koan's web UI and the controls dither, mariastew and slsk-mcp had each written for themselves.
