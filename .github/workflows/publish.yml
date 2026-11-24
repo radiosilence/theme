@@ -23,10 +23,16 @@ jobs:
           mkdir -p /tmp/probe && cd /tmp/probe
           npm init -y >/dev/null
           npm install --no-save tailwindcss@4 @tailwindcss/cli@4 "$GITHUB_WORKSPACE"
-          printf '@import "tailwindcss" source(none);\n@import "@radiosilence/theme";\n@source inline("bg-brand text-warn font-sans text-body");\n' > in.css
+          printf '@import "tailwindcss" source(none);\n@import "@radiosilence/theme";\n@source inline("bg-brand text-warn font-sans text-body rounded-lg shadow-xl text-sm bg-red-500");\n' > in.css
           npx tailwindcss -i in.css -o out.css
           grep -q 'var(--brand)' out.css
           grep -q 'Geist Mono' out.css
+          # The kit's controls are in, and Tailwind's radii, shadows, sizes and palette are not.
+          grep -q 'progress.meter' out.css
+          ! grep -qE '\.rounded-lg|\.shadow-xl|\.text-sm|\.bg-red-500' out.css
+      - uses: jdx/mise-action@v3
+      - name: Compile the storybook and check it against the kit
+        run: mise run check
 
   publish:
     needs: check
