@@ -39,12 +39,13 @@ Tailwind's own palette, radii, shadows, blurs and type sizes are removed: `round
 |---|---|
 | `primary`, `standard`, `quiet`, `link` | The button weights beside the bordered default. One `primary` a page at most: it is what the page is for |
 | `bad` | Destructive, on any weight |
+| `fill` | A button filled with its tone rather than outlined: a quiet fill on the default, the accent on `primary`, the error colour on `bad` |
 | `button` | A link drawn as a button |
 | `icon-button` | A glyph alone, with a 40px target and an `aria-label` |
 | `busy` | A control whose request is running, with a spinner after its label; `spinner` stands alone |
 | `field` | A `<label>` holding a `<span>` label, the control and a `<small>` hint; `bad` or `warn` on the field or the hint tones it |
 | `toggle` | A checkbox's row in a form: label leading, box trailing |
-| `panel` | A region told apart by a hairline |
+| `panel` | A region on the lighter `surface` ground, with a clear border an app can tone |
 | `notice` | A message about the page: a result, or with `warn` or `bad` a warning or error |
 | `status` | A square mark and a word in a tone: `ok`, `warn`, `bad`, `wait`; with `busy` it breathes |
 | `meter` | `<progress class="meter">`: a hairline, the done part in the accent or a status tone; indeterminate, a sweep |
