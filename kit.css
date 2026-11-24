@@ -184,6 +184,25 @@
     @apply border-0 bg-transparent p-0 text-muted underline hover:bg-transparent hover:text-ink active:bg-transparent;
   }
 
+  /* Filled: the button's own tone as its ground rather than its outline. On the bordered default a quiet fill a step
+   * above the page; on `primary` the accent, on `bad` the error colour, with the label in `bg`. For a page that wants
+   * its actions solid rather than drawn. */
+  .fill {
+    @apply border-transparent bg-hover/40 hover:bg-hover/70 active:bg-hover;
+  }
+
+  .fill:is(.primary, .bad) {
+    @apply text-bg hover:opacity-90 active:opacity-80;
+  }
+
+  .primary.fill {
+    @apply bg-brand hover:bg-brand;
+  }
+
+  .bad.fill {
+    @apply bg-bad hover:bg-bad;
+  }
+
   /* Destructive: compact or bordered, in `bad`. */
   .bad {
     @apply border-bad text-bad;

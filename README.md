@@ -39,6 +39,7 @@ Tailwind's own palette, radii, shadows, blurs and type sizes are removed: `round
 |---|---|
 | `primary`, `standard`, `quiet`, `link` | The button weights beside the bordered default. One `primary` a page at most: it is what the page is for |
 | `bad` | Destructive, on any weight |
+| `fill` | A button filled with its tone rather than outlined: a quiet fill on the default, the accent on `primary`, the error colour on `bad` |
 | `button` | A link drawn as a button |
 | `icon-button` | A glyph alone, with a 40px target and an `aria-label` |
 | `busy` | A control whose request is running, with a spinner after its label; `spinner` stands alone |
