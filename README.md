@@ -21,7 +21,7 @@ The kōan theme for Tailwind v4: the tokens, the Geist Mono typeface, and the ki
 }
 ```
 
-Serve `geist-mono.woff2` from this package beside the compiled stylesheet. A static site with markup of its own imports `@radiosilence/theme/tokens.css` for the tokens without the controls.
+Serve `geist-mono.woff2` from this package beside the compiled stylesheet. The checkbox's tick and the select's chevron are `data:` URLs, so the app's Content Security Policy allows `img-src 'self' data:`; without it a ticked box is a plain fill and a select has no chevron. A static site with markup of its own imports `@radiosilence/theme/tokens.css` for the tokens without the controls.
 
 The package is published to GitHub Packages, so installing it needs a token with `read:packages`.
 
@@ -54,7 +54,7 @@ Tailwind's own palette, radii, shadows, blurs and type sizes are removed: `round
 | `dense` | `<table class="dense">`: technical data, `num` columns right-aligned |
 | `disclosure` | `<details class="disclosure">` with a chevron in place of the browser's marker |
 | `toast` | A message over the page; `brief` fades by itself, `bad` is an error |
-| `sheet` | `<dialog class="sheet">`: rises from the bottom on a phone, a centred panel elsewhere |
+| `sheet` | `<dialog class="sheet">`: rises from the bottom on a phone, clear of the home indicator, a centred panel elsewhere. Its bottom padding is `--sheet-padding-bottom`. On iOS the page's script sets `--keyboard-inset` from `visualViewport` to keep it above the keyboard |
 
 ```html
 <label class="field">

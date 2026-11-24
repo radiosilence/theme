@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.3
+
+- **A sheet clears the home indicator.** On a phone its bottom padding is at least `env(safe-area-inset-bottom)`; `--sheet-padding-bottom` sets it otherwise.
+- **kit-check reads Tailwind sizes with a line-height modifier,** such as `text-xl/snug`, which compile to nothing like the bare sizes.
+- **The README says the CSP needs `img-src data:`** for the checkbox's tick and the select's chevron.
+
 ## 0.2.2
 
 - **A panel ending in a paragraph keeps even padding.** The paragraph's bottom margin had been added to the panel's padding.

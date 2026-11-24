@@ -23,7 +23,7 @@ const RULES = [
   [/^(inset-)?ring(-.+)?$/, "a control's edge is its border; focus is the theme's outline"],
   [/^(backdrop-)?blur(-.+)?$|^backdrop-/, "no blur or materials"],
   [/^bg-(linear|radial|conic|gradient)(-.+)?$|^(from|via|to)-/, "no gradients"],
-  [/^text-(xs|sm|base|lg|\d?xl)$|^text-\[\d/, "type comes from the theme's roles: fine, meta, control, body, title-sm, title, display"],
+  [/^text-(xs|sm|base|lg|\d?xl)(\/\S+)?$|^text-\[\d/, "type comes from the theme's roles: fine, meta, control, body, title-sm, title, display"],
   [new RegExp(`^[a-z-]+-(${PALETTE})-\\d`), "colours come from the theme's tokens"],
   [/-\[(#|rgba?\(|hsla?\(|oklch\(|color)/, "colours come from the theme's tokens"],
 ];
