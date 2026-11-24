@@ -250,7 +250,7 @@
 
   /* Something the page has to say about itself: a result, an error, a warning. A rule on its leading edge in the tone. */
   .notice {
-    @apply my-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-l-2 border-brand py-1 pl-3 text-control;
+    @apply my-4 block border-l-2 border-brand py-1 pl-3 text-control;
   }
 
   .notice.bad {
@@ -261,8 +261,9 @@
     @apply border-warn text-warn;
   }
 
+  /* Prose, with whatever inline markup it holds; an action follows the words on the same line. */
   .notice > :is(button, .button) {
-    @apply ml-auto;
+    @apply ms-3 align-baseline;
   }
 
   /* A status: a square mark and the word, both in its tone. The word always says what the colour does, so the colour is
