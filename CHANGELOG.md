@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.4
+
+- **Labels and summaries keep their case.** They hold file names, titles and paths too often for the kit to lowercase them; a field's label is still lowercased, and an app writes its own words lowercase in the source.
+- **A busy status is hollow under reduced motion,** so it still reads as unsettled when it cannot breathe.
+
 ## 0.2.3
 
 - **A sheet clears the home indicator.** On a phone its bottom padding is at least `env(safe-area-inset-bottom)`; `--sheet-padding-bottom` sets it otherwise.

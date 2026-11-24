@@ -46,9 +46,9 @@
     @apply mt-6 mb-2 text-meta font-normal text-muted lowercase;
   }
 
+  /* Labels and summaries are not lowercased here: they so often hold a person's or the outside world's text (a file
+   * name, a title, a path) that the app's own words in them are written lowercase in the source instead. */
   button,
-  summary,
-  label,
   .button {
     @apply lowercase;
   }
@@ -208,6 +208,10 @@
     @apply w-full;
   }
 
+  .field > span:first-child {
+    @apply lowercase;
+  }
+
   .field > small {
     @apply text-fine text-muted normal-case;
   }
@@ -275,8 +279,14 @@
     background: var(--tone);
   }
 
+  /* Still being found out: the mark breathes, or with reduced motion is hollow, so it reads as unsettled either way. */
   .status.busy::before {
     @apply animate-pulse motion-reduce:animate-none;
+
+    @media (prefers-reduced-motion: reduce) {
+      background: transparent;
+      box-shadow: inset 0 0 0 1px var(--tone);
+    }
   }
 
   :is(.status, .meter).ok {
