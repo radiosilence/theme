@@ -104,7 +104,7 @@
   /* The toggle: a square box, outlined off, filled with a tick on. A choice of one is the same box. */
   input[type="checkbox"],
   input[type="radio"] {
-    @apply m-0 size-3.5 flex-none cursor-pointer appearance-none p-0 align-[-2px] checked:border-brand;
+    @apply m-0 size-3.5 flex-none cursor-pointer appearance-none border border-muted bg-transparent p-0 align-[-2px] checked:border-brand;
   }
 
   input[type="checkbox"]:checked,
