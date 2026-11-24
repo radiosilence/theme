@@ -427,6 +427,8 @@
     max-height: min(85dvh, calc(100dvh - var(--keyboard-inset, 0px) - 1rem));
     margin: 0;
     border-width: 1px 0 0;
+    /* Flush with the bottom of a phone, so clear of its home indicator. */
+    padding-bottom: max(var(--sheet-padding-bottom, 0px), env(safe-area-inset-bottom));
   }
 
   @media (width >= 40rem) {
@@ -437,6 +439,7 @@
       max-height: 85dvh;
       margin: auto;
       border-width: 1px;
+      padding-bottom: var(--sheet-padding-bottom, 0px);
     }
   }
 }
