@@ -23,7 +23,9 @@ const RULES = [
   [/^(inset-)?shadow(-.+)?$|^(drop|text)-shadow(-.+)?$/, "no shadows: a region is told apart by a rule"],
   [/^(inset-)?ring(-.+)?$/, "a control's edge is its border; focus is the theme's outline"],
   [/^(backdrop-)?blur(-.+)?$|^backdrop-/, "no blur or materials"],
-  [/^bg-(linear|radial|conic|gradient)(-.+)?$|^(from|via|to)-/, "no gradients"],
+  [/^bg-(linear|radial|conic|gradient)(-.+)?$/, "no gradients"],
+  // Gradient stops read only in class attributes: in a code string, `from-` and `to-` start ordinary words.
+  [/^(from|via|to)-/, "no gradients", "attribute"],
   [/^text-(xs|sm|base|lg|\d?xl)(\/\S+)?$|^text-\[\d/, "type comes from the theme's roles: fine, meta, control, body, title-sm, title, display"],
   [new RegExp(`^[a-z-]+-(${PALETTE})-\\d`), "colours come from the theme's tokens"],
   [/-\[(#|rgba?\(|hsla?\(|oklch\(|color)/, "colours come from the theme's tokens"],
@@ -88,7 +90,7 @@ for (const root of paths) {
       for (const match of text.matchAll(/"((?:[^"\\\n]|\\.)*)"|`([^`]*)`/g)) {
         const value = strip(match[1] ?? match[2]);
         for (const token of value.split(/\s+/).filter((t) => t.includes("-"))) {
-          const rule = RULES.find(([re]) => re.test(base(token)));
+          const rule = RULES.find(([re, , only]) => only !== "attribute" && re.test(base(token)));
           if (rule) report(match.index + 1 + Math.max(0, value.indexOf(token)), `${token} — ${rule[1]}`);
         }
       }
