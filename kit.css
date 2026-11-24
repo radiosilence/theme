@@ -166,10 +166,11 @@
 }
 
 @layer components {
-  /* The weights beside the bordered default. Primary is what the page is for, and a page has at most one; standard is
-   * the label alone; quiet is a bar's text button; link goes somewhere, or is a lesser action inline with text. */
+  /* The weights beside the bordered default. Primary is the main action of the page, a card or a form, filled with the
+   * accent so it reads first among bordered controls; standard is the label alone; quiet is a bar's text button; link
+   * goes somewhere, or is a lesser action inline with text. Repeated row actions in a long list stay bordered. */
   .primary {
-    @apply border-brand px-5 py-3 text-body text-brand;
+    @apply border-transparent bg-brand px-5 py-3 text-body text-bg hover:bg-brand hover:opacity-90 active:bg-brand active:opacity-80;
   }
 
   .standard {
@@ -185,22 +186,13 @@
   }
 
   /* Filled: the button's own tone as its ground rather than its outline. On the bordered default a quiet fill a step
-   * above the page; on `primary` the accent, on `bad` the error colour, with the label in `bg`. For a page that wants
-   * its actions solid rather than drawn. */
+   * above the page; on `bad` the error colour, with the label in `bg`. `primary` is always filled. */
   .fill {
     @apply border-transparent bg-hover/40 hover:bg-hover/70 active:bg-hover;
   }
 
-  .fill:is(.primary, .bad) {
-    @apply text-bg hover:opacity-90 active:opacity-80;
-  }
-
-  .primary.fill {
-    @apply bg-brand hover:bg-brand;
-  }
-
   .bad.fill {
-    @apply bg-bad hover:bg-bad;
+    @apply bg-bad text-bg hover:bg-bad hover:opacity-90 active:opacity-80;
   }
 
   /* Destructive: compact or bordered, in `bad`. */
