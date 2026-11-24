@@ -235,9 +235,15 @@
     @apply flex cursor-pointer items-center justify-between gap-4 py-2 text-body;
   }
 
-  /* A region of a page, told apart by a hairline. */
+  /* A region of a page: a quieter, lighter ground rather than an outline, so a page of them reads as calm blocks rather
+   * than a grid of boxes. The border is there but clear, so an app can tone it (a status, a selection) without the
+   * panel changing size. What would sit on `surface` inside it (a code value, a nested panel) drops back to `bg`. */
   .panel {
-    @apply border border-rule p-5;
+    @apply border border-transparent bg-surface p-5;
+  }
+
+  .panel :is(.code, .panel) {
+    @apply bg-bg;
   }
 
   .panel > :first-child {

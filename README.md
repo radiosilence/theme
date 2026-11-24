@@ -44,7 +44,7 @@ Tailwind's own palette, radii, shadows, blurs and type sizes are removed: `round
 | `busy` | A control whose request is running, with a spinner after its label; `spinner` stands alone |
 | `field` | A `<label>` holding a `<span>` label, the control and a `<small>` hint; `bad` or `warn` on the field or the hint tones it |
 | `toggle` | A checkbox's row in a form: label leading, box trailing |
-| `panel` | A region told apart by a hairline |
+| `panel` | A region on the lighter `surface` ground, with a clear border an app can tone |
 | `notice` | A message about the page: a result, or with `warn` or `bad` a warning or error |
 | `status` | A square mark and a word in a tone: `ok`, `warn`, `bad`, `wait`; with `busy` it breathes |
 | `meter` | `<progress class="meter">`: a hairline, the done part in the accent or a status tone; indeterminate, a sweep |
