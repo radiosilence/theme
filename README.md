@@ -44,6 +44,7 @@ Tailwind's own palette, radii, shadows, blurs and type sizes are removed: `round
 | `icon-button` | A glyph alone, with a 40px target and an `aria-label` |
 | `busy` | A control whose request is running, with a spinner after its label; `spinner` stands alone |
 | `field` | A `<label>` holding a `<span>` label, the control and a `<small>` hint; `bad` or `warn` on the field or the hint tones it |
+| `combo` | A field and the button it feeds, joined into one control: `<span class="combo"><input> <button>…</button></span>` |
 | `toggle` | A checkbox's row in a form: label leading, box trailing |
 | `panel` | A region on the lighter `surface` ground, with a clear border an app can tone |
 | `notice` | A message about the page: a result, or with `warn` or `bad` a warning or error |
