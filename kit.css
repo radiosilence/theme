@@ -1,7 +1,8 @@
 /*
  * The kōan web kit: the controls every server-rendered page is drawn with, built from tokens.css. Plain elements come
  * out in the theme (a `<button>` is the bordered button, an `<input>` the square field), and a handful of classes give
- * the rest: the button weights, a labelled field, a field joined to its button, a panel, a notice, a status, the progress meter and the toast.
+ * the rest: the button weights, a labelled field, a field joined to its button, a panel, a notice, a status, the
+ * progress meter and the toast.
  *
  * Element rules are in `@layer base` and the classes in `@layer components`, so any utility in a template still wins.
  * The rules and their reasons are in the README; koan's docs/design/koan-theme.md is the specification.
